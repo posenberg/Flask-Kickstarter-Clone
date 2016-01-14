@@ -57,6 +57,7 @@ def create():
 
 
 #Make another route
+#mask sure all your routes end in "/"
 @app.route('/projects/<int:project_id>/')
 def project_detail(project_id):
 	project = db.session.query(Project).get(project_id)

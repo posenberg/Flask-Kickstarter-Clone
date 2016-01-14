@@ -41,12 +41,9 @@ class Project(db.Model):
 	
 	#properties when you need to create new attributes dependent on existing fields in database
 
-
-	# def num_days_left(self):
-	# 	now = datetime.datetime.now()
-	# 	num_days_left = (self.time_end - now).days
-
-	# 	return num_days_left
+	@property
+	def num_pledges(self):
+		return len(self.pledges)
 	
 
 class Pledge(db.Model):
