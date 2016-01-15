@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{%block subtitle%} Punchstarter | Welcome {%endblock subtitle%}
+{%block subtitle%} MakeMyQuince | Welcome {%endblock subtitle%}
 {% block content %}
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -7,5 +7,8 @@
         <h1>Crowdfunding Made Simple</h1>
         <p>Punchstarter is a simple crowdfunding platform to help make dreams come true!</p>
       </div>
+
+      <h3>Latest Projects</h3>
+	  {% include '_projects.html' %}
 
 {% endblock content %}
