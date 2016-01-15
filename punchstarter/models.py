@@ -1,4 +1,8 @@
-from punchstarter import db
+from punchstarter import db, app
+from sqlalchemy.sql import func
+import datetime
+import cloudinary.utils
+
 
 #create members class and inhert from db.model class
 
@@ -40,11 +44,33 @@ class Project(db.Model):
 	pledges = db.relationship('Pledge', backref='project', foreign_keys='Pledge.project_id')
 	
 	#properties when you need to create new attributes dependent on existing fields in database
-
 	@property
 	def num_pledges(self):
 		return len(self.pledges)
 	
+	#all the pledges and the amount
+	@property
+	def total_pledges(self):
+		total_pledges = db.session.query(func.sum(Pledge.amount)).filter(Pledge.project_id==self.id).one()[0]
+		if total_pledges is None:
+			total_pledges = 0
+
+		return total_pledges
+
+	@property
+	def num_days_left(self):
+		now = datetime.datetime.now()
+		num_days_left = (self.time_end -now).days
+		return num_days_left
+
+	@property
+	def image_path(self):
+	    return cloudinary.utils.cloudinary_url(self.image_filename)[0]
+	
+	@property
+	def percentage_funded(self):
+		return int(self.total_pledges  * 100 / self.goal_amount)
+
 
 class Pledge(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

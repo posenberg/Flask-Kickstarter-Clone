@@ -24,7 +24,7 @@
 						
 			<div class="panel">
 				<p class="text-center">{{ project.short_description }}</p>
-				<img class="img-responsive center-block" src="http://placehold.it/680x500" width="680" height="500">
+				<img class="img-responsive center-block" src="{{ project.image_path }}" width="680" height="500">
 			</div>
 
 			<div>
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="panel">
-				<a href="#" class="btn btn-punchstarter">Pledge Now</a>
+				<a href="{{ url_for('pledge', project_id =project.id)}}" class="btn btn-punchstarter">Pledge Now</a>
 			</div>
 
 		</div>
